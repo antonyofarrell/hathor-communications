@@ -1,0 +1,16 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  {/* TODO(per-project): client name, contact, social links */}
+  <p>&copy; {year} Brand. {t('footer.rights')}</p>
+</footer>

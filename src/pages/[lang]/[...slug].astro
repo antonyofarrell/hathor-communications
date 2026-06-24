@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import type { Lang } from '../../i18n/ui';
+
+// Build one static page per content file. The collection id is
+// "<locale>/<slug>" (e.g. "en/about"); we split it into route params.
+// The home page is named index.md and renders at the language root (/en/).
+export async function getStaticPaths() {
+  const entries = await getCollection('pages');
+  return entries.map((entry) => {
+    const [lang, ...rest] = entry.id.split('/');
+    const path = rest.join('/');
+    // The glob loader strips "/index", so the home page arrives as just
+    // "<locale>" (empty path). Treat empty or "index" as the language root.
+    const slug = path === '' || path === 'index' ? undefined : path;
+    return {
+      params: { lang, slug },
+      props: { entry },
+    };
+  });
+}
+
+const { entry } = Astro.props;
+const lang = Astro.params.lang as Lang;
+const { Content } = await render(entry);
+---
+
+<Base lang={lang} title={entry.data.title} description={entry.data.description}>
+  <Content />
+</Base>

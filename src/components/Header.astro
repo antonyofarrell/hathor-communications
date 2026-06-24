@@ -1,0 +1,39 @@
+---
+import { useTranslations, getPathWithoutLang } from '../i18n/utils';
+import { nav, type Lang } from '../i18n/ui';
+import LangSwitcher from './LangSwitcher.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Is this nav item the current page? (compare path after the lang segment)
+const here = getPathWithoutLang(Astro.url).replace(/\/$/, '');
+---
+
+<header class="site-header">
+  <a class="brand" href={`/${lang}/`}>
+    {/* TODO(per-project): logo / wordmark goes here */}
+    <span>Brand</span>
+  </a>
+
+  <nav class="site-nav" aria-label="Main">
+    <ul>
+      {nav.map((item) => (
+        <li>
+          <a
+            href={`/${lang}/${item.slug}`}
+            aria-current={here === item.slug ? 'page' : undefined}
+          >
+            {t(item.key)}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <LangSwitcher lang={lang} />
+</header>

@@ -1,0 +1,137 @@
+/* ─────────────────────────────────────────────────────────────
+   Neutral starter styles. This is a SKELETON: the tokens below are
+   placeholders so the site is legible and accessible out of the box.
+   TODO(per-project): replace the tokens with the client's brand
+   (your design-system-scraper output drops straight in here).
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* color */
+  --color-bg: #ffffff;
+  --color-fg: #1a1a1a;
+  --color-muted: #666666;
+  --color-accent: #3a5a40;
+  --color-border: #e6e6e6;
+
+  /* type */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-body);
+
+  /* scale */
+  --space: 1rem;
+  --measure: 68ch;
+  --radius: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+
+main {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding: calc(var(--space) * 3) var(--space);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+/* header / footer */
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+  flex-wrap: wrap;
+  padding: var(--space);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.brand {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-fg);
+  margin-right: auto;
+}
+
+.site-nav ul,
+.lang-switcher ul {
+  display: flex;
+  gap: var(--space);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a[aria-current="page"] {
+  text-decoration: underline;
+}
+
+.lang-switcher {
+  font-size: 0.85rem;
+}
+
+.lang-switcher [aria-current="true"] {
+  font-weight: 700;
+  color: var(--color-muted);
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: calc(var(--space) * 2) var(--space);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* accessibility floor */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  left: var(--space);
+  top: var(--space);
+  background: var(--color-bg);
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--color-accent);
+  z-index: 10;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

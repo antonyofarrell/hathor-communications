@@ -1,0 +1,29 @@
+---
+import { getPathWithoutLang } from '../i18n/utils';
+import { languages, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+// Slugs are shared across languages, so switching is just swapping the
+// leading /xx/ segment for the same page in another language.
+const rest = getPathWithoutLang(Astro.url);
+const locales = Object.keys(languages) as Lang[];
+---
+
+<nav class="lang-switcher" aria-label="Language">
+  <ul>
+    {locales.map((l) => (
+      <li>
+        {l === lang ? (
+          <span aria-current="true">{l.toUpperCase()}</span>
+        ) : (
+          <a href={`/${l}/${rest}`} hreflang={l}>{l.toUpperCase()}</a>
+        )}
+      </li>
+    ))}
+  </ul>
+</nav>
