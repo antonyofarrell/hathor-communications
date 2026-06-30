@@ -15,8 +15,8 @@ capabilities:
     - [Enseignons, Facilitons, Collaborons, Communiquons]
   closing: "...et nous sommes très performants."
 imageColumns:
-  - image: /src/assets/uploads/xcdd20-lines-6298723_1920-1536x1536.jpg.pagespeed.ic.3zqW7kKPEW.webp
+  - image: /uploads/xcdd20-lines-6298723_1920-1536x1536.jpg.pagespeed.ic.3zqW7kKPEW.webp
     caption: "TODO(per-project): légende pour cette image."
-  - image: /src/assets/uploads/bird.jpg
+  - image: /uploads/bird.jpg
     caption: "TODO(per-project): légende pour cette image."
 ---

@@ -1,9 +1,9 @@
 ---
 title: "About"
 description: "TODO(per-project): meta description for this page."
-heroImage: /src/assets/uploads/astrobook.jpg
+heroImage: /uploads/astrobook.jpg
 features:
-  - image: /src/assets/uploads/listen.jpg
+  - image: /uploads/listen.jpg
     imageAlt: "The Hathor team reviewing a translation"
     heading: "Words that travel"
     body: >
@@ -12,7 +12,7 @@ features:
     fullWidth: true
     reverse: true
 
-  - image: /src/assets/uploads/listen.jpg
+  - image: /uploads/listen.jpg
     imageAlt: "The Hathor team reviewing a translation"
     heading: "Words that travel"
     body: >

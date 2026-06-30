@@ -135,7 +135,7 @@ a {
   justify-content: space-between;
   align-items: flex-end;
   min-height: 220px;
-  background-image: url("/src/assets/uploads/footerBkg.jpg");
+  background-image: url("/uploads/footerBkg.jpg");
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;
@@ -231,7 +231,7 @@ a {
 .hero-bg {
   position: absolute;
   inset: -20px; /* oversized so its parallax drift never reveals an edge */
-  background-image: var(--hero-image, url("/src/assets/uploads/spaceball.jpg"));
+  background-image: var(--hero-image, url("/uploads/spaceball.jpg"));
   background-size: cover;
   background-position: center;
   z-index: -1;

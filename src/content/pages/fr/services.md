@@ -1,7 +1,7 @@
 ---
 title: "Services"
 description: "TODO(per-project): meta description for this page."
-heroImage: /src/assets/uploads/starbkg.png
+heroImage: /uploads/starbkg.png
 ---
 
 # Services

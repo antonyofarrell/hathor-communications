@@ -16,7 +16,7 @@ backend:
 local_backend: false
 
 # Where uploaded images are written / served from.
-media_folder: src/assets/uploads
+media_folder: public/uploads
 public_folder: /uploads
 
 # ── Internationalization ──────────────────────────────────────

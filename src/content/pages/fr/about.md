@@ -3,7 +3,7 @@ title: "À propos"
 description: "TODO(per-project): meta description for this page."
 
 features:
-  - image: /src/assets/uploads/listen.jpg
+  - image: /uploads/listen.jpg
     imageAlt: "The Hathor team reviewing a translation"
     heading: "Words that travel"
     body: >
