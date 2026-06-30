@@ -19,9 +19,17 @@ const { image, imageAlt, heading, body, dark, reverse, fullWidth } =
     "full-bleed": fullWidth,
   }}
 >
-  <div class="feature__inner" class:list={{ "feature__inner--reverse": reverse }}>
+  <div
+    class="feature__inner"
+    class:list={{ "feature__inner--reverse": reverse }}
+  >
     <div class="feature__media">
-      <img src={image} alt={imageAlt} loading="lazy" data-scroll-parallax="15" />
+      <img
+        src={image}
+        alt={imageAlt}
+        loading="lazy"
+        data-scroll-parallax="15"
+      />
     </div>
     <div class="feature__text">
       <h2>{heading}</h2>
@@ -54,7 +62,15 @@ const { image, imageAlt, heading, body, dark, reverse, fullWidth } =
   .feature__inner--reverse .feature__text {
     order: 1;
   }
-
+  .feature__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space);
+  }
+  .feature__text h2 {
+    font-size: clamp(1.5rem, 4vw, 5rem);
+    margin: 0;
+  }
   .feature__media {
     position: relative;
     aspect-ratio: 4 / 3;

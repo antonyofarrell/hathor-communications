@@ -83,6 +83,8 @@ const { Content } = await render(entry);
       </section>
     )
   }
+  {entry.data.textSections?.map((section) => <TextSection {...section} />)}
+
   {entry.data.features?.map((feature) => <Feature {...feature} />)}
   {
     imageColumns && (
@@ -102,9 +104,6 @@ const { Content } = await render(entry);
         ))}
       </section>
     )
-  }
-  {
-    entry.data.textSections?.map((section) => <TextSection {...section} />)
   }
 
   <Content />
