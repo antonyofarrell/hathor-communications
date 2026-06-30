@@ -1,5 +1,6 @@
 ---
-import { useTranslations, type Lang } from '../i18n/utils';
+import { useTranslations } from "../i18n/utils";
+import { footerLinks, type Lang } from "../i18n/ui";
 
 interface Props {
   lang: Lang;
@@ -11,6 +12,53 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  {/* TODO(per-project): client name, contact, social links */}
-  <p>&copy; {year} Brand. {t('footer.rights')}</p>
+  <div class="footer-row footer-cta">
+    <div class="footer-col">
+      <h2>{t("footer.contact.heading1")}</h2>
+    </div>
+
+    <div class="footer-col footer-col-right">
+      <h2>{t("footer.contact.heading3")}</h2>
+    </div>
+  </div>
+
+  <div class="footer-row footer-cta">
+    <div class="footer-col">
+      <h1>{t("footer.contact.heading2")}</h1>
+    </div>
+
+    <div class="footer-col footer-col-right">
+      <a class="btn" href={`/${lang}/contact`}>{t("footer.links.contact")}</a>
+    </div>
+  </div>
+  <div class="footer-row footer-top">
+    <nav class="footer-col footer-links" aria-label="Footer">
+      <h2>{t("footer.links.heading")}</h2>
+      <ul>
+        {
+          footerLinks.map((item) => (
+            <li>
+              <a href="#">{t(item.key)}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <p class="footer-copyright">
+      &copy; {year} Hathor Communications. {t("footer.rights")}
+    </p>
+  </div>
+
+  <div class="footer-row footer-contact">
+    {/* TODO(per-project): real address, phone, and email */}
+    <p>{t("footer.contact.address")}</p>
+    <p>
+      <a href="tel:+10000000000">{t("footer.contact.phone")}</a>
+    </p>
+    <p>
+      <a href="mailto:hello@hathorcommunications.com"
+        >{t("footer.contact.email")}</a
+      >
+    </p>
+  </div>
 </footer>

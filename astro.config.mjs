@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 // ─────────────────────────────────────────────────────────────
 // TODO(per-project): set this to the client's live domain.
 // It's used for absolute URLs and hreflang alternates.
-const SITE = 'https://example.com';
+const SITE = 'https://hathorcommunications.com';
 // ─────────────────────────────────────────────────────────────
 
 export default defineConfig({

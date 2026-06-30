@@ -1,19 +1,22 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import type { Lang } from '../../i18n/ui';
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import type { Lang } from "../../i18n/ui";
+import Starfield from "../../components/Starfield.astro";
+import Feature from "../../components/Feature.astro";
+import TextSection from "../../components/TextSection.astro";
 
 // Build one static page per content file. The collection id is
 // "<locale>/<slug>" (e.g. "en/about"); we split it into route params.
 // The home page is named index.md and renders at the language root (/en/).
 export async function getStaticPaths() {
-  const entries = await getCollection('pages');
+  const entries = await getCollection("pages");
   return entries.map((entry) => {
-    const [lang, ...rest] = entry.id.split('/');
-    const path = rest.join('/');
+    const [lang, ...rest] = entry.id.split("/");
+    const path = rest.join("/");
     // The glob loader strips "/index", so the home page arrives as just
     // "<locale>" (empty path). Treat empty or "index" as the language root.
-    const slug = path === '' || path === 'index' ? undefined : path;
+    const slug = path === "" || path === "index" ? undefined : path;
     return {
       params: { lang, slug },
       props: { entry },
@@ -23,9 +26,138 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const lang = Astro.params.lang as Lang;
+const { capabilities, hero, heroImage, imageColumns } = entry.data;
 const { Content } = await render(entry);
 ---
 
 <Base lang={lang} title={entry.data.title} description={entry.data.description}>
+  <section
+    class="hero full-bleed"
+    class:list={{ "hero--page": !hero }}
+    data-parallax-frame
+  >
+    <div
+      class="hero-bg"
+      data-depth="0.4"
+      aria-hidden="true"
+      style={heroImage ? `--hero-image: url(${heroImage})` : undefined}
+    >
+    </div>
+    <Starfield count={200} />
+    <div class="hero-inner">
+      {
+        hero ? (
+          <>
+            <h1 data-depth="1.4">
+              {hero.heading}{" "}
+              {hero.highlight && (
+                <span class="highlight">{hero.highlight}</span>
+              )}
+            </h1>
+            {hero.subheading && (
+              <p class="hero-sub" data-depth="0.8">
+                {hero.subheading}
+              </p>
+            )}
+          </>
+        ) : (
+          <h1 data-depth="1.4">{entry.data.title}</h1>
+        )
+      }
+    </div>
+  </section>
+  {
+    capabilities && (
+      <section class="capabilities">
+        <p class="cap-lead">{capabilities.lead}</p>
+        <div class="cap-groups">
+          {capabilities.groups.map((group) => (
+            <ul class="cap-group">
+              {group.map((verb) => (
+                <li>{verb}</li>
+              ))}
+            </ul>
+          ))}
+        </div>
+        <p class="cap-closing">{capabilities.closing}</p>
+      </section>
+    )
+  }
+  {entry.data.features?.map((feature) => <Feature {...feature} />)}
+  {
+    imageColumns && (
+      <section class="image-columns full-bleed">
+        {imageColumns.map((col) => (
+          <div class="image-col">
+            <div class="image-frame">
+              <img
+                src={col.image}
+                alt=""
+                loading="lazy"
+                data-scroll-parallax="30"
+              />
+            </div>
+            {col.caption && <p class="image-caption">{col.caption}</p>}
+          </div>
+        ))}
+      </section>
+    )
+  }
+  {
+    entry.data.textSections?.map((section) => <TextSection {...section} />)
+  }
+
   <Content />
 </Base>
+
+<script>
+  import { gsap } from "gsap";
+  import { SplitText } from "gsap/SplitText";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollSmoother } from "gsap/ScrollSmoother";
+  import { initParallaxFrames } from "../../scripts/parallax-frame";
+  import { initScrollParallax } from "../../scripts/scroll-parallax";
+  gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Must be created before any other ScrollTrigger so they measure against
+  // the smoothed scroll position rather than the native one.
+  if (!reduce) {
+    ScrollSmoother.create({
+      wrapper: "#smooth-wrapper",
+      content: "#smooth-content",
+      smooth: 1.2,
+    });
+  }
+
+  initParallaxFrames();
+
+  // ── Hero timeline ──
+  const heading = document.querySelector(".hero h1");
+  const sub = document.querySelector(".hero .hero-sub");
+  if (heading && !reduce) {
+    const split = new SplitText(heading, { type: "words" });
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.from(split.words, { y: 24, opacity: 0, duration: 0.7, stagger: 0.08 });
+    if (sub) tl.from(sub, { y: 16, opacity: 0, duration: 0.6 }, "-=0.3");
+  }
+
+  // ── Capabilities reveal on scroll ──
+  const groups = gsap.utils.toArray(".cap-group");
+  if (groups.length && !reduce) {
+    gsap.from(groups, {
+      scrollTrigger: {
+        trigger: ".capabilities",
+        start: "top 80%",
+      },
+      y: 30,
+      opacity: 0,
+      duration: 0.6,
+      ease: "power3.out",
+      stagger: 0.12,
+    });
+  }
+  // ── Scroll-driven parallax (starfield + image columns) ──
+  initScrollParallax();
+</script>

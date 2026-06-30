@@ -1,8 +1,39 @@
 ---
-title: "Home"
-description: "TODO(per-project): meta description for this page."
+title: "Hathor Communications"
+description: "Writers, editors, proofreaders, translators and audiovisual specialists."
+hero:
+  heading: "Hello."
+  highlight: "We are Hathor"
+  subheading: "Writers, editors, proofreaders, translators and audiovisual specialists."
+capabilities:
+  lead: "We…"
+  groups:
+    - [Write, Edit, Proofread, Translate]
+    - [Design, Optimize, Ideate, Activate]
+    - [Shoot, Record, Illustrate, Animate]
+    - [Pre-produce, Produce, Post-produce, Evaluate]
+    - [Teach, Facilitate, Collaborate, Communicate]
+  closing: "…and we do it all pretty well."
+features:
+  - image: /src/assets/uploads/face.jpg
+    imageAlt: "The Hathor team reviewing a translation"
+    heading: "Words that travel"
+    body: >
+      Words are our craft, but understanding comes first. We listen to your story and your audience, then shape copy that sounds unmistakably like you — only sharper.
+    dark: true
+    reverse: true
+  - image: /src/assets/uploads/face.jpg
+    imageAlt: "The Hathor team reviewing a translation"
+    heading: "Words that travel"
+    body: >
+      Words are our craft, but understanding comes first. We listen to your story and your audience, then shape copy that sounds unmistakably like you — only sharper.
+    dark: true
+    reverse: true
+imageColumns:
+  - image: /src/assets/uploads/xcdd20-lines-6298723_1920-1536x1536.jpg.pagespeed.ic.3zqW7kKPEW.webp
+    caption: "Words are our craft, but understanding comes first. We listen to your story and your audience, then shape copy that sounds unmistakably like you — only sharper."
+  - image: /src/assets/uploads/bird.jpg
+    caption: "The best work happens in close, honest collaboration. No jargon, no ghosting, no promises we can't keep. We turn up, stand by you, and treat your project as our own"
+  - image: /src/assets/uploads/tree.jpg
+    caption: "From a single tagline to a full multilingual campaign, we move between languages and formats without losing what matters: content that lands first time, with the right people."
 ---
-
-# Home
-
-TODO(per-project): hero copy. Edit in the CMS or here in Markdown.

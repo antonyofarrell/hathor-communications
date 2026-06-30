@@ -4,7 +4,7 @@
 backend:
   name: github
   # TODO(per-project): point this at THIS site's own repo (one repo per client).
-  repo: your-org/CLIENT-REPO-NAME
+  repo: antonyofarrell/hathor-communications
   branch: main
   # Sveltia needs an OAuth proxy (it omits Decap's Git Gateway).
   # The simplest free option is the Sveltia auth worker on Cloudflare.
@@ -42,5 +42,11 @@ collections:
     i18n: true
     fields:
       - { label: Title, name: title, widget: string, i18n: true }
-      - { label: "Meta description", name: description, widget: string, required: false, i18n: true }
+      - {
+          label: "Meta description",
+          name: description,
+          widget: string,
+          required: false,
+          i18n: true,
+        }
       - { label: Body, name: body, widget: markdown, i18n: true }

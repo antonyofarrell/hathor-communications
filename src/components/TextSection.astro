@@ -1,0 +1,59 @@
+---
+interface Props {
+  heading?: string;
+  columns: string[];
+  align?: "left" | "center" | "right";
+  dark?: boolean;
+  fullWidth?: boolean;
+}
+const { heading, columns, align, dark, fullWidth } = Astro.props;
+---
+
+<section
+  class="text-section"
+  class:list={{
+    "text-section--dark": dark,
+    "full-bleed": fullWidth,
+  }}
+>
+  <div
+    class="text-section__inner"
+    class:list={{
+      "text-section__inner--center": align === "center",
+      "text-section__inner--right": align === "right",
+    }}
+  >
+    {heading && <h2>{heading}</h2>}
+    <div class="text-section__columns">
+      {columns.map((text) => <p set:html={text} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .text-section--dark {
+    background: var(--color-footer);
+    color: var(--color-footer-copy);
+    padding: calc(var(--space) * 2);
+    border-radius: var(--image-border);
+  }
+  .text-section__inner {
+    max-width: var(--measure);
+    margin-inline: auto;
+  }
+  .text-section__inner--center {
+    text-align: center;
+  }
+  .text-section__inner--right {
+    text-align: right;
+  }
+  .text-section__columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space);
+    margin-top: var(--space);
+  }
+  .text-section__inner h2 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+</style>
